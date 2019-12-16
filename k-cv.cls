@@ -133,16 +133,16 @@ minimum height=2cm, yshift=0.5mm] (box) at (current page.north){};
 \setlength{\tabcolsep}{3pt}
 \newenvironment{entrylist}{%
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll }
-}{%
+}{
   \end{tabular*}
 }
-\renewcommand{\bfseries}{\headingfont\color{headercolor}}
+\renewcommand{\bfseries}{\headingfont\color{black}}
 \newcommand{\entry}[4]{%
   \parbox[t]{2cm}{#1}&\parbox[t]{12.3cm}{%
-    \textbf{#2}%
+    \textbf{\large#2}%
     \hfill%
     {\footnotesize\color{gray} \bodyfont #3}\\%
-    #4\vspace{\parsep}%
+    #4{\parsep}\newline%
   }\\}
 
 %%OLD :
