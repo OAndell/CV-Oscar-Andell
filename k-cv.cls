@@ -1,5 +1,9 @@
 \ProvidesClass{k-cv}[2015/11/29 CV class]
 \NeedsTeXFormat{LaTeX2e}
+\RequirePackage{longtable}
+\RequirePackage{tabu}
+\usepackage{comment}
+
 
 \DeclareOption{print}{\def\@cv@print{}}
 \DeclareOption*{%
@@ -25,26 +29,26 @@
 \definecolor{gray}{gray}{.35}
 \definecolor{lightgray}{gray}{.35}
 
-\definecolor{green}{HTML}{C2E15F}
+\definecolor{green}{HTML}{38590c}
 \definecolor{orange}{HTML}{FDA333}
 \definecolor{purple}{HTML}{D3A4F9}
-\definecolor{red}{HTML}{FB4485}
+\definecolor{red}{HTML}{b81414}
 \definecolor{blue}{HTML}{6CE0F1}
 
 \ifdefined\@cv@print
-  \colorlet{green}{gray}
+  \colorlet{green}{green}
   \colorlet{orange}{gray}
   \colorlet{purple}{gray}
-  \colorlet{red}{gray}
+  \colorlet{red}{red}
   \colorlet{blue}{gray}
-  \colorlet{fillheader}{white}
-  \colorlet{header}{gray}
+  \colorlet{fillheader}{green}
+  \colorlet{header}{blue}
 \else
-  \colorlet{fillheader}{gray}
+  \colorlet{fillheader}{green}
   \colorlet{header}{white}
 \fi
 \colorlet{textcolor}{gray}
-\colorlet{headercolor}{gray}
+\colorlet{headercolor}{green}
 
 %%%%%%%%%
 % Fonts %
@@ -53,7 +57,7 @@
 \RequirePackage{microtype}
 \RequirePackage[default]{lato}
 
-% \newcommand{\normalfont}{\fontseries{l}\selectfont}
+\newcommand{\normalfont}{\fontseries{uc}\selectfont}
 \newcommand{\bodyfont}{\fontseries{l}\selectfont}
 \newcommand{\thinfont}{\fontseries{el}\selectfont}
 \newcommand{\headingfont}{\fontseries{b}\selectfont}
@@ -67,10 +71,12 @@
 \RequirePackage{tikz}
 
 \newcommand{\rolefont}{%
-  \fontsize{14pt}{24pt}\selectfont%
+  \fontsize{11pt}{24pt}\selectfont%
   \thinfont%
   \color{white}%
 }
+
+
 
 \newcommand{\header}[3]{%
   \begin{tikzpicture}[remember picture,overlay]
@@ -132,35 +138,39 @@ minimum height=2cm, yshift=0.5mm] (box) at (current page.north){};
 %%%%%%%%%%%%%%%%%%%%
 \setlength{\tabcolsep}{3pt}
 \newenvironment{entrylist}{%
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll }
-}{
-  \end{tabular*}
+   \begin{longtabu} to \textwidth {@{\extracolsep{\fill}}ll}
+}{%
+   \end{longtabu}
 }
 \renewcommand{\bfseries}{\headingfont\color{black}}
 \newcommand{\entry}[4]{%
-  \parbox[t]{2cm}{#1}&\parbox[t]{12.3cm}{%
-    \textbf{\large#2}%
-    \hfill%
-    {\footnotesize\color{gray} \bodyfont #3}\\%
-    #4{\parsep}\newline%
-  }\\}
+   \parbox[t]{2cm}{#1}&\parbox[t]{12.3cm}{%
+     \textbf{\bodyfont #2}%
+     \hfill%
+     {\footnotesize\addfontfeature{Color=lightgray} #3}\\%
+     #4{\parsep}\newline%
+   }\\}
 
-%%OLD :
-%\setlength{\tabcolsep}{1pt}
+%\setlength{\tabcolsep}{3pt}
+
 %\newenvironment{entrylist}{%
-%  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill} }p{2cm}1}
-%}{%
+%  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l1 }
+%}{
 %  \end{tabular*}
 %}
-%\renewcommand{\bfseries}{\headingfont\color{headercolor}}
+
+%\renewcommand{\bfseries}{\headingfont\color{black}}
 %\newcommand{\entry}[4]{%
-%\hangindent=3mm \hangafter1%
-%  {\leavevmode\color{gray}\small #1}&\parbox[t]{11.8cm}{%
-%    \textbf{#2}%
+%  \parbox[t]{2cm}{#1}&\parbox[t]{12.3cm}{%
+%    \textbf{\bodyfont #2}%
 %    \hfill%
 %    {\footnotesize\color{gray} \bodyfont #3}\\%
-%    \bodyfont #4\vspace{\parsep}%
+%    #4{\parsep}\newline%
 %  }\\}
+
+
+  
+
 %%%%%%%%%%%%%%%%%%%%%%%
 % Manual Bibliography %
 %%%%%%%%%%%%%%%%%%%%%%%
